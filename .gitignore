@@ -1,10 +1,11 @@
-# 指定したファイルを除外
-intro_summery.md
-# ルートディレクトリを指定
+# # 指定したファイルを除外
+# intro_summery.md
+# # ルートディレクトリを指定
 
-# ディレクトリ以下を除外
-private/
-document/
-data/
-others_tmp_box/
-# /以外の文字列にマッチ「*」
+# # ディレクトリ以下を除外
+# private/
+# document/
+# data/
+# others_tmp_box/
+# daily_report/
+# # /以外の文字列にマッチ「*」

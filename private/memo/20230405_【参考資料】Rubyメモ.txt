@@ -1,0 +1,1682 @@
+・	変数は｢名札｣である。(｢参照｣みたいなもの)
+
+		num = 10
+		print(num)
+
+		num = 12
+		print(num)
+		
+			別のオブジェクトを代入するということは、変数を別のオブジェクトの名札に変更したということになります。
+			上記の場合は最初の「print」メソッドでは「10」が出力されますが、
+			次の「print」メソッドでは変数に別のオブジェクトを代入していますので「12」が出力されます。 
+		
+		val = 10
+		print(val)
+
+		val = "こんにちは"
+		print(val)
+
+			またオブジェクトは元になっているクラスが決まっていますが、
+			変数はオブジェクトに付けられた名札でしかないため変数自体には型のようなものは存在しません。
+			その為、一度代入が行われた変数に対して、まったく違うクラスから作成されたオブジェクトを代入することも可能です。 
+		
+		pref1 = "東京"
+		pref2 = pref1
+			
+			変数はあくまでオブジェクトに対する名札ですので、
+			変数「pref2」を新たに「東京」と言う文字列オブジェクトの名札にした場合でも
+			「東京」と言う文字列オブジェクトは1つのままです。
+			つまり1つのオブジェクトに2つの名札が付いている状態です。 
+		
+		str1 = "Tokyo"
+		str2 = str1
+
+		str1 << ",Japan" # <<演算子は別の文字列オブジェクトを作成しないことに注意
+
+		print(str1)
+		print(str2)
+		
+			上記の場合、どちらの「print」メソッドも「Tokyo,Japan」を出力します。
+		
+		str1 = "Tokyo"
+		str2 = str1
+
+		str1 = "Osaka"
+
+		print(str1)
+		print(str2)
+		
+			この場合、str1は"Osaka"という文字列オブジェクトを指すようになるので、
+			print(str1)	# Osaka
+			print(str2) # Tokyo
+			となる。
+
+・	複数の変数に代入
+
+		変数1, 変数2, 変数3, ... = 式1, 式2, 式3, ...
+		変数1, 変数2, 変数3, ... = [要素1, 要素2, 要素3, ...]
+		
+			代入演算子「=」の左辺に代入される変数をカンマで区切って並べて記述します。
+			そして右辺には左辺に記述した変数に代入するオブジェクトや式などをカンマで区切って並べて記述します。
+			この場合、右辺に記述された式を評価した値が左辺に記述された変数に順に代入されていきます。
+			変数1には式1が、変数2には式2が、といった感じです。 
+		
+		city1, city2, city3 = "東京", "大阪"
+		
+			なお左辺に記述した変数の数より右辺に記述したオブジェクトの数が少ない場合、
+			代入されるオブジェクトが無い変数には「nil」が代入されます。
+
+・	定数
+
+		変数名の一文字目が英大文字だと定数になる。
+
+・	条件分岐
+
+		if 条件式 then
+		  条件式が真の時に実行する処理1
+		  条件式が真の時に実行する処理2
+		end
+		
+			→	条件式の後に改行がある場合はthenは省略可能。
+				基本的にその場合はthenは省略することがルールになっている。
+		
+		if 条件式 then
+		  条件式が真の時に実行する処理1
+		  条件式が真の時に実行する処理2
+		else
+		  条件式が偽の時に実行する処理1
+		  条件式が偽の時に実行する処理2
+		end
+		
+		if 条件式1 then
+		  条件式1が真の時に実行する処理
+		elsif 条件式2 then
+		  条件式1が偽で条件式2が真の時に実行する処理
+		elsif 条件式3 then
+		  条件式1及び条件式2が偽で条件式3が真の時に実行する処理
+		else
+		  全ての条件式が偽の時に実行する処理
+		end
+		
+		unless 条件式 then
+		  条件式が偽の時に実行する処理
+		end
+		
+		case 対象オブジェクト
+		when 値1 then
+		  値1と一致する場合に行う処理
+		when 値2 then
+		  値2と一致する場合に行う処理
+		when 値3 then
+		  値3と一致する場合に行う処理
+		else
+		  どの値にも一致しない場合に行う処理
+		end
+			
+			※ case文では「then」は省略可能です 
+		
+		真の時に実行する式 if 条件式
+		
+			｢式修飾子｣という。
+			「if」修飾子は実行する処理を先に記述しているだけです。
+			ただ、先に記述することで何を実行しようとしているのかが分かり易くなる場合があります。
+			また簡潔に記述することもできます。
+		
+			例)
+			print("num = ", num) if debug
+		
+		偽の時に実行する式 unless 条件式
+
+・	繰り返し
+
+		while 条件式 do
+		  実行する処理1
+		  実行する処理2
+		end
+		
+			※「do」は省略可能です。
+		
+		until 条件式 do
+		  実行する処理1
+		  実行する処理2
+		end
+		
+			※「do」は省略可能です。 
+		
+			until文は指定した条件式が偽(false)の間、繰り返し処理を行います。
+			
+				→	実際には｢○○という条件に達するまで｣という用途で使わないとわかりにくいと思われる。
+		
+		for 変数 in オブジェクト do
+		  実行する処理1
+		  実行する処理2
+		end
+		
+			※「do」は省略可能です。 
+			
+			「for」文では繰り返しが1回行われるたびにオブジェクトに対して「each」メソッドが実行し取得した要素などを変数に代入します。
+			よって「for」文で指定できるオブジェクトは「each」メソッドを持ったオブジェクトでなければなりません。
+			例えば配列やハッシュ、範囲オブジェクトなどが該当します。 
+			
+				例)
+				for num in 1..3 do
+				  print("num = ", num, "¥n")
+				end
+		
+		オブジェクト.each{|変数|
+		  実行する処理1
+		  実行する処理2
+		}
+
+		オブジェクト.each do |変数|
+		  実行する処理1
+		  実行する処理2
+		end
+		
+			オブジェクトに含まれる要素を「succ」メソッドで順に取得して変数に格納し、
+			「{」から「}」までの処理(又は「do」から「end」までの処理)を実行します。
+			
+			例)
+			range = 5..10
+			range.each{|num|
+			  print("num = ", num)
+			}
+			
+				上記の場合では、範囲オブジェクトに対して「each」メソッドが実行されています。
+				範囲オブジェクトから順に「5」「6」「7」「8」「9」「10」が取り出されて
+				変数「num」に格納された後で「{」から「}までの処理が実行されます。
+			
+				下記のような記述も可能
+				
+					(5..10).each{|num|
+					  print("num = ", num)
+					}
+				
+				※	ここで解説した「each」メソッドやこの後で解説する「times」メソッドなどのように
+					繰り返しを行うブロック{}付きのメソッドをイテレータと呼んでいます。
+		
+		オブジェクト.times{|変数|
+		  実行する処理1
+		  実行する処理2
+		}
+		
+			「times」メソッドは、変数に「0」から「対象のオブジェクトが持つ数値 - 1」を順に代入しながら
+			「{」から「}」までの処理(又は「do」から「end」までの処理)を実行します。1回繰り返す毎に1ずつ数値は増加します。
+			
+				例)
+				10.times{
+				  print("Hello¥n")
+				}
+		
+		オブジェクト.upto(max){|変数|
+		  実行する処理1
+		  実行する処理2
+		}
+		
+			「upto」メソッドは、変数に「対象のオブジェクトが持つ数値」から「max」を順に代入しながら
+			「{」から「}」までの処理(又は「do」から「end」までの処理)を実行します。1回繰り返す毎に1ずつ数値は増加します。
+			(「|変数|」の部分は省略可能です)。 
+				
+				例)
+				3.upto(7){|num|
+				  print("num = ", num, "¥n")
+				}
+		
+		オブジェクト.downto(min){|変数|
+		  実行する処理1
+		  実行する処理2
+		}
+		
+			「downto」メソッドは、変数に「対象のオブジェクトが持つ数値」から「min」を順に代入しながら
+			「{」から「}」までの処理(又は「do」から「end」までの処理)を実行します。1回繰り返す毎に1ずつ数値は減少します。
+			(「|変数|」の部分は省略可能です)。 
+			
+				例)
+				7.downto(3){|num|
+				  print("num = ", num, "¥n")
+				}
+		
+		オブジェクト.step(limit, step){|変数|
+		  実行する処理1
+		  実行する処理2
+		}
+		
+			「step」メソッドは、変数に「オブジェクトの値」から「limit」を超える前まで順に代入しながら
+			「{」から「}」までの処理(又は「do」から「end」までの処理)を実行します。
+			1回繰り返す毎に「step」に指定した数値だけ増加します。(「|変数|」の部分は省略可能です)。 
+		
+				例)
+				2.4.step(5.3, 0.8){|num|
+				  print("num = ", num, "¥n")
+				}
+				
+				上記の場合、「2.4」「3.2」「4.0」「4.8」の値を変数「num」に格納しながら「{」から「}」までの処理を実行します。
+				「limit」を超える前まで実行されることに注意して下さい。 
+		
+		loop{
+		  実行する処理1
+		  実行する処理2
+		}
+		
+			「loop」メソッドはKernelクラスで用意されているメソッドです。無限ループを行います。
+			
+				例)
+				num = 1
+				loop{
+				  print("num = ", num, "¥n")
+				  num += 1
+				  if num > 10 then
+					break
+				  end
+				}
+		
+		break
+		
+			「break」を使用することで、繰り返し処理の本来の終了条件とは別に繰り返しを終了させることが可能です。
+			なお繰り返しが入れ子になっている場合は「break」が実行された一番内側の繰り返しを抜けます。 
+		
+		next
+		
+			繰り返し処理の中で「next」が実行されるとブロック内の「next」以降の処理が行われずに次の繰り返しへ進みます。 
+			(continueである)
+			なお繰り返しが入れ子になっている場合は「next」が実行された一番内側の繰り返しに関して次の繰り返しへ進みます。 
+			
+				例)
+				count = 0
+				("aa".."az").each{|str|
+				  count += 1
+				  if count % 3 != 0 then
+					next
+				  end
+
+				  print(str + "¥n");
+				}
+		
+		redo
+		
+				例えば下記の式で「each」メソッドのよって「ac」が取り出されて繰り返しが行われた場合、
+				変数「count」の値は「3」となっているため「redo」によって繰り返しが改めて行われます。
+				繰り返しが改めて行われるというのは取り出される要素が同じで改めて繰り返しが最初から実行されるということです。
+				この場合「each」メソッドによって先ほどと同じ「ac」が取り出されて改めて繰り返しが行われますが、
+				変数「count」の値は元に戻っていませんので今度は「4」となります。よって繰り返しは最後まで実行されます。 
+				
+					→	重要な点として｢aa｣に処理が戻るということではない、｢ac｣に対する処理がもう一回行われるということである。
+						うまくやらないと無限ループになるので結構怖いが。
+				
+				例)
+				count = 0
+				print("[start]¥n")
+				("aa".."ae").each{|str|
+				  count += 1
+
+				  if count % 3 == 0 then
+					redo
+				  end
+
+				  print(count, ":" + str + "¥n");
+				}
+				
+				出力
+				[start]
+				1:aa
+				2:ab
+				4:ac
+				5:ad
+				7:ae
+
+		真の時に実行する式 while 条件式
+		偽の時に実行する式 until 条件式
+		
+			例)
+			num = 2
+			num *= 2 while num < 1000
+		
+		
+
+・	範囲オブジェクト
+
+		range1 = 5..10
+		range2 = "d".."g"
+		
+		
+		first...last
+		
+			..演算子と異なり、...演算子の場合、最後の要素は含まれない。
+		
+		range1 = Range.new(5, 10)		# ..演算子と同様
+		range2 = Range.new(5, 10, true) # ...演算子と同様(最後の要素は含まれない)
+
+・	配列
+
+		array = [2005, 2006, 2007, 2008]
+		array = ["山田", "太郎", 1992, 12, 31, "男性"]
+		
+		array = [2005, 2006, 2007, 2008]
+		print(array[0])
+		year = array[1]
+		
+		atメソッド
+		
+			例)
+			array = [2005, 2006, 2007, 2008]
+			print(array[0])
+			print(array.at(0))
+		
+		Arrayクラス
+		
+			array = Array[2005, 2006, 2007, 2008]
+			
+			array1 = Array.new(3)
+			array2 = Array.new
+			
+				要素数だけを指定した場合、各要素には初期値としてのオブジェクトが代入されていませんので「nil」が代入されます。
+				よって次のように配列オブジェクトを作成した場合と同じです。 
+				array1 = [nil, nil, nil]
+			
+			array1 = ["Red", "Red", "Red"]
+			array2 = Array.new(3, "Red")
+			
+				最初の例では、各要素には「Red」と言う文字列オブジェクトが各要素に代入されます。
+				これらのオブジェクトは値は「Red」で同じですがオブジェクトとしては全て別のオブジェクトです。
+
+				それに対して2つ目の例では「Red」と言う文字列オブジェクトが1つだけ作成され全ての要素に代入されます。
+				各要素は同じオブジェクトを参照していることになります。
+				よって文字列オブジェクトを何らかの方法で変更すると全ての要素が参照しているオブジェクトに影響が出ます。 
+			
+			array = Array.new(3){"Red"}
+			
+				この場合、要素数が3つの配列オブジェクトが作成されますが、各要素に対してブロック内の処理が呼び出されて実行されます。
+				今回は単に文字列オブジェクトの「Red」を記述しています。
+				この場合は各要素に「Red」が格納されますが、要素毎に毎回オブジェクトが作成されて代入されているため
+				各要素には値は同じですが別々の文字列オブジェクトが代入されます。 
+			
+			array = ["Red", "Red"}
+			newarray = Array.new(array)
+			
+				上記の場合、配列オブジェクト「array」の0番目の要素と1番目の要素に代入されているオブジェクトは別々のものでが、
+				複製された配列オブジェクト「newarray」の0番目の要素に代入されているオブジェクトは、
+				元の配列オブジェクト「array」の0番目の要素に代入されているオブジェクトは同一です。 
+			
+			array = Array["赤", "あお", "緑"]
+			array[1] = "青"
+
+				インデックスが「1」の要素に対して、新しいオブジェクトの「青」を代入しています。
+			
+			array = Array["赤", "青", "緑"]
+			print(array.length)		# 要素数
+			print(array.nitems)		# nilの要素を除外した要素数
+
+		配列に対する繰り返し
+		
+			array = Array["赤", "青", "緑"]
+			for var in array do
+			  print("Color = " + var + "¥n")
+			end
+			
+			array = Array["赤", "青", "緑"]
+			array.each{|var|
+			  print("Color = " + var + "¥n")
+			}
+		
+		多次元配列
+		
+			personals = [["佐藤", 20], ["山田", 28], ["加藤", 17]]
+
+			name1 = personals[0][0]
+			old1 = personals[0][1]
+
+			name2 = personals[1][0]
+			old2 = personals[1][1]
+
+			name3 = personals[2][0]
+			old3 = personals[2][1]
+
+・	ハッシュ
+
+		hash = {"Yamada" => 34, "Katou" => 28, "Endou" => 18}
+		print(hash["Katou"])			# 存在しないキーの場合はnilが返される
+		print(hash.fetch("Katou"))		# 存在しないキーの場合は「IndexError」エラーが発生する。
+		
+		# 空のハッシュを作成
+		hash = Hash.new()
+		
+		# 空のハッシュを作成
+		hash = Hash.new {|hash, key| hash[key] = "none"}
+			上記はブロック内の変数名が実際の変数名と重複してるので例として不適切。(変数名を｢h｣とかにしてくれればいいのだが)
+			eachとかのブロックと同じ。
+		
+		# Hashクラスのクラスメソッドの[]を使用した方式(まあ分かりにくいので{}にすべきだろう)
+		hash = Hash["Yamada" => "Tokyo", "Katou" => "Nagano", "Endou" => "Aomori"]
+		copyhash = Hash[hash]
+		
+		存在しないキーを指定した場合にデフォルトで返される値の変更
+		
+			例)
+			hash = Hash.new("none")
+			print(hash["Yamada"])
+			
+			例)
+			hash = Hash.new{|hash, key|
+			  hash[key] = key
+			}
+			print(hash["Yamada"])
+			print(hash["Takahashi"])
+				
+				この場合、存在しないキーを指定して値を取得した時、値としてキーのオブジェクト返されます。 
+			
+			例)
+			hash = Hash.new{|hash, key|
+			  key
+			}
+			print(hash["Yamada"])
+			print(hash["Takahashi"])
+			
+				この場合も存在しないキーを指定して値を取得した時、値としてキーのオブジェクトが返されますが新しい要素としては格納されません。
+				その為再度同じ存在しないキーを指定した場合は改めてブロック内が実行されます。 
+		
+			例)
+			hash = Hash.new()
+			hash.default = "none"
+			print(hash["Yamada"])
+		
+		要素の追加と値の変更
+		
+			例)
+			hash = {"Lemon" => 100, "Orange" => 150}
+			hash["Lemon"] = 120
+			hash["Banana"] = 90
+			
+			例)
+			hash = {"Lemon" => 100, "Orange" => 150}
+			hash.store("Lemon", 120)
+			hash.store("Banana", 190)
+		
+		ハッシュのサイズの取得
+		
+			hash = {"Lemon" => 100, "Orange" => 150}
+			print(hash.length)
+			print(hash.size)
+				
+				lengthでもsizeでもどちらでも良いらしい
+				
+					→	rubyのコーディング規約では、エイリアスであるlengthではなく、sizeを使いましょうということになっている。
+		
+		ハッシュに対する繰り返し
+		
+			hash = {"Lemon" => 100, "Orange" => 150}
+			hash.each{|key, value|
+			  print(key + "=>", value)
+			}
+
+			hash = {"Lemon" => 100, "Orange" => 150}
+			hash.each_key{|key|
+			  print("key = " + key)
+			}
+			
+				→	each_keyではなくkeysか何かで代替できたはず。(each_keyは文字数が多いので嫌われているっぽい)
+
+			hash = {"Lemon" => 100, "Orange" => 150}
+			hash.each_value{|value|
+			  print("value = ", value)
+			}
+		
+		ハッシュに含まれるキーや値を配列として取得
+		
+			hash = {"Lemon" => 100, "Orange" => 150}
+			array = hash.keys
+
+			hash = {"Lemon" => 100, "Orange" => 150}
+			array = hash.values
+
+			hash = {"Lemon" => 100, "Orange" => 150}
+			array = hash.to_a
+			
+				to_aだと、[[key1, values1], [key2, value2], ...]のようにして返される。
+		
+		括弧の省略
+		
+			http://docs.ruby-lang.org/ja/1.9.3/doc/spec=2fliteral.html
+			
+				メソッドの引数の末尾に要素が1つ以上のハッシュを渡す場合は、{ }を省略することができる。
+				
+					railsだと
+					
+						render json: @user
+					
+					のような箇所。これは全て省略しないで書くと
+					
+						render({:json => @user})
+					
+					である。後置シンボル記法なら
+					
+						render({json: @user})
+					
+					となる。
+
+・	メソッド
+
+		トップレベル
+		
+			オブジェクト指向のプログラミングではクラスを定義し、そのクラスからオブジェクトを作成するということから開始します。
+			ところが今までのサンプルでは次のように実行するプログラムを単に記述していました。
+
+				print("Hello¥n")
+
+			このように特定のクラス定義の中に記述されたのではなく、クラス定義の外側の部分はトップレベルと呼ばれています。
+			トップレベルにはクラスの定義などを記述できますし、プログラムが実行されるとトップレベルに記述されたプログラムが順に実行されて行きます。
+
+			例えばJava言語であれば、あるクラス定義の中に記述されたmainメソッドが実行されますが、
+			Rubyにおけるトップレベルは厳密には何かのクラスのメソッドではありません。
+			オブジェクト指向でありながらもメソッド以外で実行する処理を記述してあるのは変な気もしますが、
+			あまり細かい事にはこだわっていないようです。 
+			
+		selfとmain
+		
+			Rubyでは「self」と呼ばれる式が用意されています。
+			「self」はメソッド内で実行されると、そのメソッドを実行しているオブジェクトを参照することが出来ます。
+
+			ではトップレベルで「self」を実行するとどうなるのでしょうか。トップレベルは厳密にはメソッドではないのですが、
+			「self」を実行すると「main」と言うオブジェクトを返してくれます。
+
+				print(self.to_s)
+
+			では「main」と言うオブジェクトの元になっているクラスは何かを確認してみます。
+			オブジェクトに対して「class」メソッドを実行するとそのオブジェクトのクラスを返します。
+
+				print(self.to_s)
+				print(self.class.to_s)
+
+			実行してみると「main」オブジェクトの元になっているクラスは「Object」クラスと表示されます。
+
+			これらのことから、Rubyではプログラムが実行されると「Object」クラスのオブジェクトである「main」を作成し、
+			その「main」オブジェクトの中のとあるメソッド内に記述されたプログラムを実行しているようにも見えます。
+			ただそう見えるだけで、実際にはトップレベルはトップレベルであり、
+			トップレベルであっても「self」が何も返さないのはおかしいので「main」と言うオブジェクトを返すようにしているだけのようです。 
+		
+		トップレベルに定義されたメソッド
+
+			メソッドはクラスの中に記述するものですが、トップレベルの中にもメソッドを定義することが出来ます。
+			トップレベルに定義されたメソッドは「Kernel」モジュールの中に追加されることになっています。
+			(どういう仕組みなのかは良く分かっていません)。
+
+			「Kernel」モジュールは全てのクラスの元になっている「Object」クラスに読み込まれています。
+			その為、トップレベルに定義されたモジュールは、「Kernel」モジュールの中で既に定義されている
+			「print」メソッドなどと同じようにどのクラス内からでも呼び出すことができます。
+			またメソッドを呼び出す際に、呼び出し元のオブジェクト(レシーバーと呼ばれています)を省略できるので、
+			あたかも関数のように使用することが可能です。
+
+			よって特定のクラス内ではなくトップレベルの位置にメソッドを定義すれば、
+			関数のように使用できるメソッドを定義することが可能となります。 
+			
+				→	ちなみにRuby 1.9以降、最上位の基底クラスはBasicObjectクラス。
+		
+		メソッドの定義と呼び出し
+		
+			def メソッド名(引数1, 引数2, ...)
+			  実行する処理
+			  実行する処理
+			end
+
+				例)
+				def printHello
+				  print("Hello¥n")
+				end
+				
+				printHello
+				
+					注)
+					メソッドは実際に呼び出されるよりも前に定義されていなければなりません。例えば次のようなプログラムはエラーとなります。
+
+						printHello
+
+						def printHello
+						  print("Hello¥n")
+						end
+				
+				例)
+				def printHello(msg, name)
+				  print(msg + "," + name + "¥n")
+				end
+
+				printHello("Hello", "Yamada")
+				
+				例)
+				def addString(str)
+				  str << ",Japan" # この場合、呼び出し元の変数も変更される(http://gam0022.net/blog/2013/02/09/ruby-variable/)
+				end
+
+				address = "Tokyo"
+				print(address + "¥n")
+
+				addString(address)
+				print(address + "¥n")
+				
+					※	重要！！
+					
+							rubyのメソッド引数は「値渡し」であるが、rubyの変数は「ラベル」なので、
+							「<<演算子」を使ったりすると、呼び出し元の変数の値も変更される。
+							そういう意味では「参照を値渡ししている」と考えてよい。
+							http://gam0022.net/blog/2013/02/09/ruby-variable/
+							http://qiita.com/metheglin/items/ca452bc0a3866d2de7bf
+							
+								要するに
+									str = "Tokyo"
+								では、strというラベルが新しい「Tokyo」という文字列オブジェクトを指すようになるだけだが、
+									str << "Tokyo"
+								では、strの指し示す文字列オブジェクト自体が変更される。ここは要注意。
+								
+								重要なのは、代入演算子の動作が、「変数の向き先（参照先）を変更する」である点。
+								変数の指しているオブジェクトの値を変更しているわけではない。ここの理解が重要。
+				
+				例)デフォルト引数
+				def printHello(msg="No msg", name="No name")
+				  print(msg + "," + name + "¥n")
+				end
+
+				printHello("Hello", "Yamada")
+				printHello("Hello")
+				printHello()
+				
+				def printHello(msg, name="No name")
+				  print(msg + "," + name + "¥n")
+				end
+
+				printHello("Hello", "Yamada")
+				printHello("Hello")
+
+		引数を配列として受け取る
+
+			例)
+			def printHello(msg, *names)
+			  print(msg + "," + name + "¥n")
+			end
+
+			printHello("Hello")
+			printHello("Hello", "Yamada")
+			printHello("Hello", "Yamada", "Endou")
+			printHello("Hello", "Yamada", "Endou", "Katou", "Takahashi")
+		
+		戻り値
+		
+			def tashizan(num1, num2)
+			  return num1 + num2
+			end
+
+			sum = tashizan(10, 25)
+			print("合計 = ", sum)
+			
+				なお「return」は省略可能です。省略された場合はメソッド内の最後の式を評価した値が戻り値となります。
+		
+		戻り値(多重代入)
+		
+			def keisan(num1, num2)
+			  return num1 + num2, num1 - num2
+			end
+
+			plus, minus = keisan(10, 25)
+
+・	クラス
+
+		アクセスメソッド
+		
+			定義式					機能
+			attr_reader :変数名		参照が可能
+			attr_writer :変数名		更新が可能
+			attr_accessor :変数名	参照と更新が可能
+			
+				class Car
+				  def initialize(carname="未定義")
+					@name = carname
+				  end
+				  
+				  attr_accessor :name
+				end
+				
+				car = Car.new()
+				car.name = "civic"
+				print(car.name)
+
+					上記のように対象となるインスタンス変数名に対して「attr_reader」「attr_writer」「attr_accessor」のいずれかを使って
+					上記のように記述することでインスタンス変数の参照や更新用のメソッドを個別に定義する代わりとなります。 
+					
+					「オブジェクト名.変数名」で参照したり更新したりが直接行えます。
+					(クラス外からインスタンス変数が直接操作できるようになったわけではなく、
+					参照や更新が行えるメソッドが自動的に作成されたと考えて下さい)。 
+		
+		定数
+		
+			class Reji
+			  SHOUHIZEI = 0.05
+
+			  def initialize(init=0)
+				@sum = init
+			  end
+			  
+			  def kounyuu(kingaku)
+				@sum += kingaku
+			  end
+			  
+			  def goukei()
+				return @sum * (1 + SHOUHIZEI)
+			  end
+			end
+
+			reji = Reji.new(0)
+			reji.kounyuu(100)
+			reji.kounyuu(80)
+			print(reji.goukei())
+			
+				クラス外から定数を参照したい場合は
+				
+					print(Reji::SHOUHIZEI)
+				
+				のようにする。
+		
+		クラス変数
+		
+			class Car
+			  @@count = 0
+
+			  def initialize(carname="未定義")
+				@name = carname
+				@@count += 1
+			  end
+
+			  def getCount()
+				return @@count;
+			  end
+
+			end
+
+			car1 = Car.new("crown")
+			car2 = Car.new("civic")
+
+			print("現在生成されたオブジェクト数:", car1.getCount())
+		
+		継承
+		
+			class Car
+			  def accele
+				print("アクセルを踏みました")
+			  end
+
+			  def brake
+				print("ブレーキを踏みました")
+			  end
+			end
+
+			class Soarer < Car
+			  def openRoof
+				print("ルーフを開けました")
+			  end
+			end
+		
+		オーバーライド
+		
+			class Car
+			  def accele
+				print("アクセルを踏みました")
+			  end
+
+			  def brake
+				print("ブレーキを踏みました")
+			  end
+			end
+
+			class Soarer < Car
+			  def openRoof
+				print("ルーフを開けました")
+			  end
+			  
+			  def accele
+				print("アクセルを踏み加速しました")
+			  end
+			end
+
+			class Crown < Car
+			  def reclining
+				print("シートをリクライニングしました")
+			  end
+			end
+			
+				オーバーライドの際には特にキーワードは不要なようである。
+		
+		スーパークラスのメソッドを呼び出す
+		
+			class Car
+			  def accele
+				print("アクセルを踏みました¥n")
+			  end
+			end
+
+			class Soarer < Car
+			  def accele
+				super
+				print("加速しました¥n")
+			  end
+			end
+			
+			# 引数のある場合
+			class Car
+			  def accele(acceletime)
+				print(acceletime, "秒間アクセルを踏みました")
+			  end
+			end
+
+			class Soarer < Car
+			  def accele(acceletime)
+				super(acceletime)
+				print("加速しました")
+			  end
+			end
+			
+			# 引数が自動的に渡されるケース
+			class Car
+			  def accele(acceletime)
+				print(acceletime, "秒間アクセルを踏みました")
+			  end
+			end
+
+			class Soarer < Car
+			  def accele(acceletime)
+				super
+				print("加速しました")
+			  end
+			end
+			
+				「super」は特殊なメソッドと考えて下さい。
+				メソッドの中で「super」メソッドを実行すると、
+				スーパークラスの中でその呼び出されたメソッドと同じメソッド名を持つメソッドを探して実行します。 
+		
+		アクセス制御
+
+			class Car
+			  def accele(acceletime=1)
+				print("アクセルを踏みました¥n")
+				print("スピードは", calcSpeed(acceletime), "Kmです¥n")
+			  end
+
+			  public :accele
+
+			  def brake
+				print("ブレーキを踏みました¥n")
+			  end
+
+			  public :brake
+
+			  def calcSpeed(acceletime)
+				return acceletime * 10
+			  end
+			  
+			  private :calcSpeed
+			end
+
+			car = Car.new
+			car.accele(10)
+			
+				特に指定しない場合はpublicになる。
+				
+				initializeメソッドは常にprivate。
+			
+			# まとめて指定する方式
+			
+			class Car
+			  public
+
+				def accele(acceletime=1)
+				  print("アクセルを踏みました¥n")
+				  print("スピードは", calcSpeed(acceletime), "Kmです¥n")
+				end
+
+				def brake
+				  print("ブレーキを踏みました¥n")
+				end
+
+			  private
+
+				def calcSpeed(acceletime)
+				  return acceletime * 10
+				end
+			end
+
+			car = Car.new
+			car.accele(10)
+
+・	モジュール
+
+		モジュールの定義
+		
+			module HeikinModule
+			  def heikin(x, y)
+				kekka = (x + y) / 2
+				print(kekka)
+			  end
+			end
+			
+				モジュールはクラスと同じくメソッドを定義する事が出来ます。
+				クラス変数に相当するものはモジュールにはありませんが定数は定義する事が出来ます。 
+				
+				モジュールの利用方法としては「モジュール名.メソッド名」の形式で関数のように実行するか、
+				または他のクラスの中にインクルードして利用することが出来ます。
+		
+		モジュールを関数のように使う
+		
+			module SuuchiModule
+			  def minValue(x, y)
+				if x < y
+				  return x
+				else
+				  return y
+				end
+			  end
+
+			  def maxValue(x, y)
+				if x > y
+				  return x
+				else
+				  return y
+				end
+			  end
+
+			  module_function :minValue
+			  module_function :maxValue
+			end
+			
+			print(SuuchiModule.minValue(10, 8), "¥n")
+			print(SuuchiModule.maxValue(10, 8), "¥n")
+			
+			# includeして呼び出す場合は下記のように行える
+			include SuuchiModule
+			print(minValue(10, 8), "¥n")
+			print(maxValue(10, 8), "¥n")
+				
+				→	別ファイルから使う場合はrequireとincludeが必要。
+				
+		クラスにモジュールをincludeする。
+		
+			module SuuchiModule
+			  def minValue(x, y)
+				if x < y
+				  return x
+				else
+				  return y
+				end
+			  end
+			end
+
+			class Test
+			  include SuuchiModule
+
+			  def dispValue(x, y)
+				min = minValue(x, y)
+				print("2つの値", x, "と", y, "の中で小さい値は", min, "です¥n")
+			  end
+			end
+
+			test = Test.new
+			test.dispValue(10, 8)
+
+・	%記法
+
+		http://d.hatena.ne.jp/shunsuk/20081220/1229779001
+
+		%{I LOVE #{name}}
+		
+			文字列リテラル。式展開が有効。%記法だとシングルクォートやダブルクォートをエスケープする必要がありません。
+
+・	%w記法
+
+		%w(foo bar) is a shortcut for ["foo", "bar"]. 
+			
+			→	%w[foo bar]でもよい。
+		
+		Meaning it's a notation to write an array of strings seperated by spaces instead of commas and without quotes around them. 
+		You can find a list of ways of writing literals in zenspider's quickref.
+
+・	メソッド引数のアスタリスク
+
+		http://tm.root-n.com/programming:ruby:etc:parameter_asterisk
+		
+		def hoge(a, b, c, d)
+		  p a
+		  p b
+		  p c
+		  p d
+		end
+		 
+		arr = [111, 222, 333]
+		hoge(1, *arr)
+		
+			｢呼び出す側の引数にアスタリスクを付けると与えられた配列は展開されます｣
+			とのことなので、上記はhoge(1, 111, 222, 333)となる。
+		
+		
+		よって、recipeの
+		
+			role :web, *%w[
+			  192.168.1.121
+			  192.168.1.122
+			]
+		
+		は、
+		
+			role(:web, "192.168.1.121", "192.168.1.122")
+		
+		である。
+
+・	シンボル
+
+		http://d.hatena.ne.jp/keyesberry/20080802/p1
+
+		シンボルは文字列と一対一で対応する記号である
+		文字列'Charlie'に対応するシンボルは:Charlieとなる
+		
+			→	Ruby 1.9から、ハッシュキーのシンボルのコロンは前置でも後置でもオッケーになった。(後置だと「=>」を省略できる)
+				http://d.hatena.ne.jp/sevenpg/20100822/1282477146
+				http://ruby-newbie.hatenablog.com/entry/2012/12/30/201905
+				
+					→	ハッシュの表記方法ですがRoRでよく使われるのは、
+
+							capital = { :france =>"Paris", :japan => "Tokyo", :uk => "London" }
+
+						ではなくて。下の書き方です。
+
+							capital = { france: "Paris", japan: "Tokyo" , uk: "London" }
+
+						キーにシンボルを使う場合はコロンをハッシュキーの最後につけると矢印を省略して書けますというRuby1.9の表記方法です。
+
+		文字列のところで書いたように
+
+			my_name = 'Charlie'
+			his_name = 'Charlie'
+
+		とした場合
+		2つの異なるオブジェクトがRuby空間に生成される
+
+			my_name.object_id # => 8848520
+			his_name.object_id # => 8827340
+
+		これらのシンボルは以下により得られる
+
+			my_name.intern # => :Charlie
+			his_name.intern # => :Charlie
+
+		当然に異なるオブジェクトのシンボルは
+		異なるオブジェクトであることが期待される
+		しかしそうはならない
+
+			my_name.intern.object_id # => 314378
+			his_name.intern.object_id # => 314378
+
+		つまり同一記号のシンボルは同じオブジェクトである
+
+		これはつまり一つのRuby空間には
+		無数の"Charlie"が存在しうるけれども
+		これに対応する:Charlieというシンボルオブジェクトは
+		ただ一つしか存在しないということを意味している
+
+		そうこれはまるで整数だ
+
+		整数と同様にシンボルには名札を付ける必要はない
+		シンボル記号に対するオブジェクトは一意であり
+		ユーザは名札がなくても希望するオブジェクトにアクセスできる
+		つまりシンボル記号自体がそのオブジェクトの名札の役割を担う
+
+		ここまで来ればシンボルの正体ははっきりする
+		文字列のような顔をして
+		数字のようにそれ自体が名札として機能する
+		そうシンボルとは…
+		文字列の皮を被った整数だったんだ！
+		
+			→	「名札のついた整数」と考えれば分かりやすい。
+
+		シンボルの出番
+
+		Rubyには複数の関連するオブジェクトを
+		ユーザがまとめて管理できるようにするオブジェクトがある
+		配列とハッシュである
+
+			our_name = [ 'Charlie', 'Fox', 'Henry' ]
+
+		これでRuby空間に3つの文字列オブジェクトを管理する
+		１つの配列オブジェクトが生成され
+		それにour_nameの名札が付けられる
+		
+		配列で管理されるオブジェクトへのアクセスは
+		その位置を表す数字で行なえる
+
+			our_name[1] # => "Fox"
+
+		でも数字には個性がないので
+		1と”Fox"との間にはその位置以上の関連性はない
+		できればもっと関連性を持たせて意味付けをしたい
+
+		そのような場合シンボルが使える
+
+			our_name = { :my_name => 'Charlie', :his_name => 'Fox', :my_nephew => 'Henry' }
+
+		これでRuby空間に3つの文字列オブジェクトを管理する
+		１つのハッシュオブジェクトが生成され
+		それにour_nameの名札がつけられる
+
+		ハッシュで管理されるオブジェクトへのアクセスは
+		そのキー値を使って行う
+
+			our_name[:his_name] # => "Fox"
+
+		なおRuby空間では:his_nameは"his_name"に対応しているが
+		それらは別のオブジェクトなので
+
+			our_name["his_name"] # => nil
+
+		となる
+		
+			→	これが困るのでシンボルが使われると考えてよい。つまりハッシュのキーには基本的にシンボルを使う。
+
+		Rails空間では事情が異なるようだ
+		
+		シンボルの特性をまとめてみよう
+
+			・文字列と一対一に対応した記号である(文字列オブジェクトとシンボルオブジェクトは多対一の関係になる)
+			・同一記号のシンボルはRuby空間に唯一つ存在する（整数と同様、文字列と相違）
+			・シンボル記号自体が意味付けを表象できる（文字列と同様、整数と相違）→つまり見た目が文字列なので整数よりも分かりやすいということ。
+
+		これらの特性を考えれば
+
+		そのオブジェクトの変更が予定されない場合
+		無駄なオブジェクトが生成されないシンボルは
+		速度の点で文字列オブジェクトよりも有利であり
+		またその記号の可読性を高めたい場合
+		整数オブジェクトよりも有利である
+
+・	print/puts/p/inspect
+
+		printメソッドは、改行を行いません。
+		putsメソッドは、文字列の最後で強制改行を行います。
+
+		pメソッドは、引数が文字列の場合は、出力の際に「"」で文字列を囲んで返します。
+		出力された値が、文字列なのか数値なのかを見分けられます。
+		pメソッドは、プログラムの動作を確認したいときに、出力された値の型や構造を確認したい場合に使います。
+		
+		inspectメソッドは、変数のリテラル表現を返します。
+		
+			a = ["0", "1"]
+			puts a.inspect  # p a と同様
+
+・	requireとincludeの違い
+
+		http://faultier.blog.jp/archives/1220074.html
+		
+			Rubyファイルを読み込むのはrequire
+			includeは「モジュールを使うよって宣言」ではなくて「モジュールが持ってる性質を、クラスに組み込むメソッド」
+				includeをclass/module文の中で使うと、モジュールの特徴をそのクラスに追加する
+					モジュールの中でdef self.hogeとして定義されてたやつはそのクラスのクラスメソッドになる
+					モジュールの中でdef fugaとして定義されてたやつはそのクラスのインスタンスメソッドになる
+				includeをclass/module文の外で使うと、モジュールの特徴をObjectクラスに追加する
+					モジュールの中でdef self.hogeとして定義されてたやつは全てのクラスのクラスメソッドになる
+					モジュールの中でdef fugaとして定義されてたやつは全てのクラスのインスタンスメソッドになる
+
+
+・	alias
+
+		http://doc.ruby-lang.org/ja/1.9.3/doc/spec=2fdef.html#alias
+		
+			# メソッド foo を定義
+			def foo
+			  "foo"
+			end
+
+			# 別名を設定(メソッド定義の待避)
+			alias :_orig_foo :foo
+
+			# foo を再定義(元の定義を利用)
+			def foo
+			  _orig_foo * 2
+			end
+
+			p foo  # => "foofoo"
+
+・	define_method
+
+		http://www.func09.com/wordpress/archives/373
+
+		class DynamicMethod
+		  # my_method_1, my_method_2というメソッドを定義する
+		  [1,2].each do |num|
+			define_method("my_method_#{num}") do |message| # 引数message
+			  puts "My method #{num}:#{message} "
+			end
+		  end
+		end
+
+		dm = DynamicMethod.new
+		p dm.methods.select{|i| i=~/my_method/} # => ["my_method_1", "my_method_2"]
+
+		dm.my_method_1 "hello"    # => My method 1:hello
+		dm.my_method_2 "good-bye" # => My method 2:good-by
+
+・	module
+
+		http://blog.livedoor.jp/sparklegate/archives/50254891.html#
+		
+			module Com
+			  module Example
+				module Web
+				  module Util
+					class MyClass;
+					  def initialize; p 'Hello World.'; end
+					end
+				  end
+				end
+			  end
+			end
+			
+			ディレクトリ階層もJavaスタイルでmoduleと対応させて下さい。
+
+			   % mkdir ./com; mkdir ./com/example; mkdir ./com/example/web; mkdir ./com/example/web/util
+			   
+			   使うとき
+			   
+				   require 'com/example/web/util/MyClass'
+				module Com
+				  module Example
+					class Sample
+					  include Com::Example::Web::Util
+					  def execute
+						my_class = MyClass.new
+					  end
+					end
+				  end
+				end
+			   
+			   おそらく、capistranoの｢load｣は、requireとincludeを一緒にやってくれていると思われる。
+			   
+			   で、｢namespace｣は、おそらくmoduleだろう。
+			   ｢task｣は、多分define_method。
+
+・	ローカル変数、インスタンス変数、クラス変数、グローバル変数、定数
+
+		1. 小文字aからz か、_ で始まるのは、ローカル変数。
+		＜例＞num1
+		最初に宣言されたブロック内だけで有効のようです。ブロックとは { } で囲まれた間のことかな？beginからendもブロックというのかな？
+
+		2.@から始まるのは、インスタンス変数。
+		＜例＞@num1
+
+		3.@@から始まるのは、クラス変数。
+		＜例＞@@num1
+
+		4.$から始まるのは、グローバル変数。
+		＜例＞$num1
+		どこでも使えるグローバル変数です。これを多用すると結構危険ですよね。
+
+		5.大文字AからZで始まるのは、定数。
+		＜例＞Num1
+		でも、初期化した後にも代入できるらしいです。ただし初期化の後の代入は、Warningが出るようです。
+
+・	DSL(Domain Specific Language)
+
+		http://gihyo.jp/admin/feature/01/dsl/0002?page=2
+		
+			Rubyでは，DSLの作成にeval，class_eval，そしてinstance_evalという便利な機能を使う事ができます。
+			evalは，文字列をRubyのステートメントとして評価します。evalはRubyカーネルのメソッドであり，
+			オブジェクト内部や単純なスクリプトの中でも使うことができます。
+			これにより，非常に柔軟なプログラムを作ることができるのです。
+		
+		
+		http://www.atmarkit.co.jp/news/201009/13/spell.html
+
+・	block, Proc, lambda, method
+
+		http://qiita.com/kidachi_/items/15cfee9ec66804c3afd2
+		
+			ブロックとは
+			
+				do～end（もしくは{～}）で囲われた、引数となるためのカタマリ。 
+			
+			yieldは「ブロックを呼び出すもの」、Procは「ブロックをオブジェクト化したもの」
+			
+			ブロックの性質は
+				
+				それ単体では存在できず、メソッドの引数にしかなれない(「do~endのカタマリ」がその辺に単体で転がっているのは見た事ないはず。)
+				引数として渡されたブロックは、yieldによって実行される 
+				
+					def foo
+					  yield(1,2)
+					end
+					
+					foo {|a,b|
+					  p [a, b]
+					}  # => [1, 2] (要するに p [1, 2] を実行した)
+			
+			def give_me_block
+			  yield
+			end
+			
+			give_me_block do
+			  p "Hello, block!"
+			end
+			
+				↓この定義は、下記のように書くことも出来る。
+			
+			def give_me_block( &block )
+			  block.call
+			end
+			
+			give_me_block do
+			  p "Hello, block!"
+			end
+			
+				→	&blockの「&」について。
+						&を付けることで、実際に引数にブロックが渡ってきた際、
+						Procオブジェクトに変換している。
+				
+				→	Procオブジェクトとは
+						ブロックをオブジェクト化したものがProc
+						ブロックがそれ単体では存在できないことを思い出す （→オブジェクト化してしまえばok）
+						ブロックをオブジェクトに変換することで、引き渡されたメソッド（give_me_block）内で扱えるようにする
+				
+				→	ブロック引数は、仮引数の中で一番最後に定義されていなければならない
+					以下みたいなのはNG
+						
+						def give_me_block( &block1, param1 )
+						def give_me_block( &block1, &block2 )
+					
+					つまるところ引数として渡せるブロックは一つだけ。
+				
+			以上を踏まえるとこんな考え方も出来る。
+			
+			「どうせブロック引数は一つしか取れないんだから
+			呼び出し箇所をblock.callなんて明示せずに、yieldで統一しちゃえば良いじゃん」
+			
+				def give_me_block( &block )
+				  yield    # block.callをやめてyieldに変更
+				end
+				
+				give_me_block do
+				  p "Hello, block!"
+				end
+			
+			さらに
+			「ブロックは全部yieldが示すんだから、仮引数（&block）もいらなくね？」
+			
+				def give_me_block    # (&block)を除去
+				  yield
+				end
+				
+				give_me_block do
+				  p "Hello, block!"
+				end
+			
+			これが色々省略されまくったyield文の正体です。
+			
+			一見give_me_blockは何も引数をとらないメソッドのように見えるのに、
+			その内部にyieldを持っている以上「ブロックを引数として受けとるメソッドである」
+			ということを認識しないといけない。
+
+			Rubyコードを読み解く際によく注意しておかなければならない点の一つのみたいです。
+
+		■Rubyのblock、Proc、lambdaを理解する
+		http://d.hatena.ne.jp/shunsuk/20090101/1230816826
+		
+			lambdaはProc.newもしくはproc と同じ。
+
+				l = lambda {p "hoge"}
+				l.call
+				
+				=> "hoge"
+			
+			lambda は -> で書ける
+			
+				l = -> {p "hoge"}
+				l.call
+		
+			引数を1つ渡す場合
+
+				l = -> (x){p x}
+				l.call("hoge")
+
+				=> "hoge"
+
+			引数を2つ渡す場合
+
+				l = -> (x,y){p x,y}
+				l.call("hoge", "fuga")
+
+		■RubyでのDSLの作り方
+		http://d.hatena.ne.jp/rubikitch/20080217/rubydsl
+		
+		■メソッドの引数にブロックを渡す
+		http://www.yukun.info/blog/2008/01/ruby-block.html
+		
+
+・	｢!｣キーワード
+
+		破壊的メソッド(オブジェクトの状態が変わるメソッド)には!を付加するのがrubyの流儀らしい。
+		
+			→	a.sort
+				と
+				a.sort!
+				だと、前者はa配列の内容は変化しないが、後者はa配列の内容そのものがソートされる。
+
+・	クラス内でのselfと@の違い
+
+		@hoge は、インスタンス変数 @hoge を参照します。
+		self.hoge は、インスタンスメソッド hoge を呼び出します。
+		self.hoge = は、インスタンスメソッド hoge= を呼び出します。
+
+・	特異クラス
+
+		http://magazine.rubyist.net/?0046-SingletonClassForBeginners
+		
+		Ruby でのクラスメソッドの定義の仕方には大きくわけて二つのやり方があります。一つは特異メソッド方式、もう一つが特異クラス方式です。
+
+			def self.method_name の特異メソッド形式
+				特異メソッド方式では、def self.class_method のようにメソッド名の前にクラスメソッドを定義する対象のクラス名をつけて定義します。
+				リファレンスマニュアルにあるように直接クラス名を書いてもいいのですが、
+				定義するクラス自身の中に書く場合はこのように self. と書くことが多いでしょう。
+				
+			class << self の特異クラス形式
+				特異クラス方式では、class << self と書いた行から end までの間に def class_method のように
+				クラス名を書かずにインスタンスメソッドと同じようなメソッド定義を書いていきます。
+				この間に書いたものはクラスメソッドとして定義されます。 
+			
+			どちらも正しいクラスメソッドの定義の仕方ですが、
+			特異メソッド方式では複数のクラスメソッドをまとめて定義したい場合に都度の self. を書くのが面倒なため、
+			そのようなときは特異クラス方式がとられることが多いようです。
+
+・	rubyでselfを省略出来ない場合
+
+		http://qiita.com/akira-hamada/items/4132d2fda7e420073ab7
+		(rubyコーディング規約にも書いてある)
+		
+		セッターメソッドを呼ぶ時はselfを省略出来ません。以下set_default_nameメソッドの様な例ですね。
+
+			class User
+			  attr_accessor :name
+			
+			  def set_default_name
+				name = 'unknown' # nameというローカル変数が作られるだけ
+				# self.name = 'unknown' # こう書くべき
+			  end
+			end
+			
+			user = User.new
+			user.set_default_name
+			
+			user.name # => nil
+		
+		こういうケースがあるので、基本的に値をセットする場合は「@name」のようにした方が好ましいとも言える。
+		ただ、その場合setterメソッドを呼び出さないので、setterメソッド内でなにか特別な処理を行っている場合は問題となる。
+
+・	module_functionの用途
+
+		http://qa.atmarkit.co.jp/q/37
+		http://ref.xaio.jp/ruby/classes/module/module_function
+		
+		module_functionを使うと
+
+			クラスメソッド
+			プライベートメソッドなインスタンスメソッド(includeしたクラス内で使う)
+		
+		の2つの形で使えるようになります。
+		
+		代表的なのは Mathモジュールの数学関数ですね。
+		
+			モジュールMathに対して呼ぶ
+			includeしてレシーバなしで使う
+		
+		という2通りのやり方で使用することが出来ます。
+
+・	Module::includedメソッド
+
+		http://ref.xaio.jp/ruby/classes/module/included
+		
+		includedメソッドは、includeメソッドによってモジュールが他のモジュールやクラスにインクルードされたあとに呼び出されます。
+		引数にはモジュールをインクルードするクラスやモジュールが入ります。
+
+			module Feature
+			  def self.included(klass)
+				puts "#{klass} has included #{self}!"
+			  end
+			end
+			 
+			class Container
+			  include Feature
+			end
+			
+			#Container has included Feature!
+
+		Rubyではモジュールをインクルードしても、モジュールメソッド（モジュールの特異メソッド）はクラスには継承されませんが、
+		次のようにincludedの中でextendメソッドを呼び出すことでモジュールメソッドをクラスメソッドとして使えるようにできます。
+		
+			→	下記のようにクラスメソッドとインスタンスメソッドを同時に追加する際は
+				Moduleの中にModuleを定義する方式が頻出パターンのようである。
+				
+					http://www.techscore.com/blog/2013/03/01/rails-includeされた時にクラスメソッドとインスタンスメ/
+
+			module Feature
+			  def method_i
+				"Instance Method"
+			  end
+			  
+			  module ClassMethods
+				def method_c
+				  "Class Method"
+				end
+			  end
+			  
+			  extend ClassMethods
+			  
+			  def self.included(klass)
+				klass.extend ClassMethods
+			  end
+			end
+			 
+			class Container
+			  include Feature
+			end
+			 
+			puts Container.new.method_i
+			puts Container.method_c
+			
+			#Instance Method
+			#Class Method
+
+・	begin/rescue/ensure
+
+		http://www.minituku.net/courses/566428009/lessons/760432481/texts/302758961?locale=ja
+
+			begin
+			  ＜例外を発生させる可能性のある処理＞
+			rescue => ＜変数＞
+			  ＜例外が起こった場合の処理＞
+			ensure
+			  ＜例外の有無に関わらず実行される処理＞
+			end
+		
+		実際の例
+		
+			begin
+			  x = 10
+			  y = "a"
+			  p x + y
+			rescue => ex
+			  puts(ex.message)
+			ensure
+			  puts("足し算をしました")
+			end
+		
+		メソッドの処理をbegin 〜 rescue 〜 endを使った例外処理ですべて囲む時は、beginとendを省略して書くことができます。
+
+			def foo
+			  ＜メソッドの本体＞
+			rescue => ex
+			  ＜例外処理＞
+			ensure
+			  ＜後処理＞
+			end
+		
+		実際に実行した例が以下になります。
+
+			def foo(x, y)
+			  result = x + y
+			  return result
+			rescue => ex
+			  return x, y
+			ensure
+			  if result
+				puts "xとyを足した結果は、#{result}でした"
+			  else
+				puts "xとyは足せませんでした"
+			  end
+			end
+			 
+			foo(10, 20)
+			foo(10, "a")
+
+・	block_given?(ブロックが渡されたかどうかの判定)
+
+		http://qiita.com/kidach1/items/15cfee9ec66804c3afd2#2-6
+		https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md#auto-release-resources
+		
+		例えば「File.open」というクラスメソッドは、ブロックが渡された場合と渡されなかった場合で動作が異なる。
+		
+			f = File.open('testfile')
+			# 自分でcloseする必要がある
+			f.close
+			
+			File.open('testfile') do |f|
+			  # 何か処理を行う
+			end
+			# 自分でcloseする必要がない
+		
+		この場合に使用されているのが、block_given?である。下記の用に使う
+		
+			def wonder_seven_box
+			  if block_given?
+				yield(7)
+			  else
+				p "Don't mind. Feel free to call me."    # ブロックが与えられなければこちら
+			  end
+			end
+			
+		下記のように、ブロックを渡しても渡さなくてもどちらでも呼び出すことが出来る。
+		
+			wonder_seven_box do |x|
+			  p 3 + x
+			end
+			=> 10
+			
+			wonder_seven_box do |x|
+			  p "happy_block! " * x
+			end
+			=> "happy_block! happy_block! happy_block! happy_block! happy_block! happy_block! happy_block! "
+
+			wonder_seven_box
+			=> "Don't mind. Feel free to call me."
+
+
+・	&.オペレーター(Safe Navigation Operator)
+
+		[What does &. (ampersand dot) mean in Ruby? - Stack Overflow](http://stackoverflow.com/questions/36812647/what-does-ampersand-dot-mean-in-ruby/36812667)
