@@ -1,2 +1,0 @@
-# apprentice
-## git commit --amend
