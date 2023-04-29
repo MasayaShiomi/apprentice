@@ -1,0 +1,45 @@
+・	VS Code設定
+
+	参考：ドットインストール
+
+	日本語化
+	
+		Extensionから「Japanese」検索
+		
+	テーマの設定
+	
+		メニュー＞ユーザー設定
+		Github Themeの設定
+		
+	Auto Save
+	
+		「afterDalay」選択
+		メニュータブの自動保存にチェックが付与される
+		
+	Tab Size
+	
+		「4」から「2」へ変更
+		
+	Word Wrap（折り返し）
+	
+		長い行を折り返してくれる
+		「off」から「on」へ変更
+	
+	Emmet設定
+	
+		コードを書きやすくするための機能
+		検索窓で検索する
+		
+		Emmet:Variables
+			項目の追加
+				langを「en」から「ja」へ変更
+	
+	プログラミング用フォントの導入
+	
+		新しいテキストファイルで「ab c　d」を張り付けてみると・・・
+		Ricty Diminishedのインストール
+		https://github.com/edihbrandon/RictyDiminished/raw/master/RictyDiminished-Regular.ttf
+		ダウンロードできたら、開いて「インストール」をクリック
+		ユーザー設定＞Editor:Font Family内を削除して「Ricty Diminished」貼り付ける
+		先ほどのタブに戻ると全角スペースが区別されている。
+	
