@@ -2,7 +2,7 @@
 
 PASSWORD_FILE="passwords_3"
 ENCRYPTED_FILE="passwords_3.gpg"
-SECRET_PASSPHRASE="abc"
+SECRET_PASSPHRASE=$SECRET_PASSPHRASE
 
 function add_password() {
 	if [ -e "$ENCRYPTED_FILE" ]; then
