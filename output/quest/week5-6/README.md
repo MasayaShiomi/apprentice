@@ -233,11 +233,11 @@
 </p>
 </details>
 
-## ステップ2:
+## ステップ2: データベース構築
 
 
 <details>
-<summary>事前準備</summary>
+<summary>MySQLにログイン</summary>
 <p>
 
 #### 1. MySQLを実行する環境にフォルダを作成し、以下のデータを配置します。git cloneをしても構いません。
@@ -364,12 +364,12 @@ source import_sample_data.sql
 
 ```sql
 SELECT 
-		e.title AS episode_title,
-		e.view_count AS view_count
+  e.title AS episode_title,
+  e.view_count AS view_count
 FROM 
-		episodes e
+  episodes e
 ORDER BY 
-		e.view_count DESC
+  e.view_count DESC
 LIMIT 3;
 ```
 
@@ -381,11 +381,11 @@ LIMIT 3;
 
 ```sql
 SELECT 
-    p.title AS program_title, 
-    e.season_number, 
-    e.episode_number, 
-    e.title AS episode_title, 
-    e.view_count 
+  p.title AS program_title, 
+  e.season_number, 
+  e.episode_number, 
+  e.title AS episode_title, 
+  e.view_count 
 FROM episodes AS e 
 JOIN programs AS p 
 ON e.program_id = p.id 
@@ -401,22 +401,21 @@ LIMIT 3;
 
 ```sql
 SELECT 
-    ch.name AS channel_name, 
-    br.broadcast_time AS broadcast_start_time, 
-    ADDTIME(br.broadcast_time, SEC_TO_TIME(ep.duration*60)) AS broadcast_end_time,
-    ep.season_number AS season_number, 
-    ep.episode_number AS episode_number, 
-    ep.title AS episode_title, 
-    ep.description AS episode_description 
+  ch.name AS channel_name, 
+  br.broadcast_time AS broadcast_start_time, 
+  ADDTIME(br.broadcast_time, SEC_TO_TIME(ep.duration*60)) AS broadcast_end_time,
+  ep.season_number AS season_number, 
+  ep.episode_number AS episode_number, 
+  ep.title AS episode_title, 
+  ep.description AS episode_description 
 FROM 
-    broadcasts br 
+  broadcasts br 
 JOIN 
-    channels ch ON br.channel_id = ch.id 
+  channels ch ON br.channel_id = ch.id 
 JOIN 
-    episodes ep ON br.episode_id = ep.id 
+  episodes ep ON br.episode_id = ep.id 
 WHERE 
-    DATE(br.broadcast_time) = CURDATE();
-
+  DATE(br.broadcast_time) = CURDATE();
 ```
 
 </p></details>
