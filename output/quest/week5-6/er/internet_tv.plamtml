@@ -1,0 +1,104 @@
+@startuml
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "channels" as channels {
+  *id : int <<PK>>
+  --
+  *name : varchar(100)
+}
+
+entity "users" as users {
+  *id : int <<PK>>
+  --
+  *username : varchar(255)
+  *email : varchar(255) {unique}
+  password : varchar(255)
+}
+
+entity "programs" as programs {
+  *id : int <<PK>>
+  --
+  *title : varchar(100)
+  description : text
+}
+
+entity "genres" as genres {
+  *id : int <<PK>>
+  --
+  *name : varchar(100)
+}
+
+entity "program_channel" as program_channel {
+  *program_id : int <<FK>>
+  *channel_id : int <<FK>>
+}
+
+entity "program_genres" as program_genres {
+  *program_id : int <<FK>>
+  *genre_id : int <<FK>>
+}
+
+entity "episodes" as episodes {
+  *id : int <<PK>>
+  --
+  *program_id : int <<FK>>
+  season_number : int(11)
+  episode_number : int(11)
+  title : varchar(100)
+  description : text
+  duration : int(11)
+  release_date : datetime
+  view_count : int(11)
+}
+
+entity "broadcasts" as broadcasts {
+  *id : int <<PK>>
+  --
+  *channel_id : int <<FK>>
+  *program_id : int <<FK>>
+  *episode_id : int <<FK>>
+  broadcast_time : datetime
+}
+
+entity "user_views" as user_views {
+  *id : int <<PK>>
+  --
+  *user_id : int <<FK>>
+  *episode_id : int <<FK>>
+  view_date : datetime
+}
+
+entity "favorites" as favorites {
+  *id : int <<PK>>
+  --
+  *user_id : int <<FK>>
+  *program_id : int <<FK>>
+}
+
+entity "view_history" as view_history {
+  *id : int <<PK>>
+  --
+  *user_id : int <<FK>>
+  *episode_id : int <<FK>>
+  viewed_at : datetime
+}
+
+users ||..o{ favorites
+users ||..o{ user_views
+users ||..o{ view_history
+channels ||..o{ program_channel
+channels ||..o{ broadcasts
+programs ||..o{ program_channel
+programs ||..o{ program_genres
+programs ||..o{ favorites
+programs ||..o{ broadcasts
+programs ||..o{ episodes
+genres ||..o{ program_genres
+episodes ||..o{ broadcasts
+episodes ||..o{ user_views
+episodes ||..o{ view_history
+@enduml

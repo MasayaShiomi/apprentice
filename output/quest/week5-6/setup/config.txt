@@ -1,0 +1,6 @@
+
+TEMPLATE_FILE=./import_sample_data_template.txt
+SQL_FILE=../import_sample_data.sql
+
+
+NEW_PATH=""
