@@ -237,51 +237,66 @@
 
 
 <details>
-<summary>DockerComposeを使用してMySQL環境を構築する</summary>
+<summary>MySQLにログイン</summary>
 <p>
 
-#### 1. docker-compose.yml ファイルがあるディレクトリに移動し、コンテナの構築・起動を実施します。
+#### 1. MySQLを実行する環境にフォルダを作成し、以下のデータを配置します。git cloneをしても構いません。
+- csvフォルダ
+- setupフォルダ
+- import_sample_data.sql
+- internet_tv.sql
 
-```
-docker compose up -d
-```
-
-#### 2. コンテナに接続します。
-
-```
-docker compose exec db bash
-```
+#### 2. 作成したフォルダを移動します。
 
 #### 3. 以下のコマンドを実行して、MySQLにログインします。
 ```sql
-mysql -u root -p
+mysql -u <ユーザ名> -p
 ```
 
-#### 4. [補足] ユーザに権限を与えます。
+※その他環境（Dockerなど）を利用している方は、コマンドを読み替えてMySQLへログインしてください。
 
-```
-# ユーザ名とホスト名の確認
-SELECT User, Host FROM mysql.user;
-
-# ユーザに権限を与える。※権限範囲は状況に合わせます。
-GRANT ALL PRIVILEGES ON *.* TO '[ユーザ名]'@'ホスト名';
-
-# 設定変更後、権限の再読み込みをします。
-FLUSH PRIVILEGES;
-```
-以後、rootを使用せず、一般ユーザでログインをします。
 
 </p>
 </details>
 
 <details>
-<summary>データベース構築、テーブル構築</summary>
+<summary>データベース構築</summary>
 <p>
 
-#### 5. データベースを作成します。
+#### 4. データベースを作成します。
 ```sql
-source internet.sql
+CREATE DATABASE internet_tv;
 ```
+#### 5. データベースの一覧を表示します。
+```sql
+SHOW DATABASES;
+```
+-> `internet_tv`が作成されていることを確認します。
+
+#### 6. データベースを選択します。
+```sql
+USE internet_tv;
+```
+
+
+</p>
+</details>
+
+<details>
+<summary>テーブル構築</summary>
+<p>
+
+#### 7. SQLスクリプトを実行して、テーブルを作成します。
+```sql
+source internet_tv.sql
+```
+
+#### 8. テーブルの一覧を表示します。
+```sql
+SHOW TABLES;
+```
+->テーブルが作成されていることを確認します。
+
 
 </p>
 </details>
@@ -290,52 +305,55 @@ source internet.sql
 <summary>サンプルデータ登録</summary>
 <p>
 
-#### 6. mysqlimportコマンドを使用するために、`@@local_infile`ファイルの設定を一時的に変更します。
+- csvフォルダ内のサンプルデータを`LOAD DATA INFILE`コマンドを使用して登録していきます。
+- `LOAD DATA INFILE`は、MySQLサーバーが直接アクセス可能な場所にあるファイルのみを読み込むことができます。
+- セキュアで高速な読み取りができるようですが、特定のフォルダへサンプルデータを配置する必要があり、また環境に合わせてファイルパスの設定を行う必要があります。以下、事前準備からすすめていきます。
 
-#### 設定状況の確認
+
+#### 9. 以下のコマンドを実行し、Valueのフォルダパスをコピーします。
 ```sql
-SELECT @@local_infile;
+SHOW VARIABLES LIKE 'secure_file_priv';
+```
+#### 実行結果 (例)
+```
+mysql> SHOW VARIABLES LIKE 'secure_file_priv';
++------------------+------------------------------------------------+
+| Variable_name    | Value                                          |
++------------------+------------------------------------------------+
+| secure_file_priv | C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\ |
++------------------+------------------------------------------------+
 ```
 
-#### 実行結果
-```
-+----------------+
-| @@local_infile |
-+----------------+
-|              0 |
-+----------------+
-1 row in set (0.00 sec)
-```
+#### 10.  setupフォルダ内の csvフォルダ を該当フォルダへコピーします。
 
-#### 結果が`0`であれば次のコマンドを実行します。
+#### 11.  setupフォルダ内の config.txt 内の `NEW_PATH=""`にファイルパスを貼り付けて保存します。
 
+##### 例
+```
+NEW_PATH="C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/"
+```
+※Windowsの場合、バックスラッシュ`\`をスラッシュ`/`に修正してください。
+
+
+#### 12.  setupフォルダ内の bashシェルスクリプト `setup.sh` を実行します。
+
+データ登録に使用するコマンドが作成されて出力されます。
+エラーになっていないことを確認します。
+
+※今回bashを使用していますが、`import_sample_data.sql`ファイル内のフォルダパスをテキストエディタで置換するなど編集した場合も同様です。
+
+##### 例
 ```sql
-SET GLOBAL local_infile=on;
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/csv/channels.csv'
 ```
 
-#### 実行結果
-```
-+----------------+
-| @@local_infile |
-+----------------+
-|              1 |
-+----------------+
-1 row in set (0.00 sec)
-```
-
-#### 7. MySQLをquitで抜けて、csvデータをテーブルに登録します。
-
-```
-./import_csv.sh
-```
--> コマンド実行後にユーザのパスワードを入力します。
-
-#### 8. `@@local_infile`ファイルの設定を元に戻します。
-
+#### 13.  MySQLの画面に戻り、以下のコマンドを実行してテーブルにサンプルデータを登録します。
 ```sql
-SET GLOBAL local_infile=off;
+source import_sample_data.sql
 ```
 
+</p>
+</details>
 
 
 
