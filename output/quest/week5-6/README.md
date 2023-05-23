@@ -280,7 +280,7 @@ FLUSH PRIVILEGES;
 
 #### 5. データベースを作成します。
 ```sql
-source internet.sql
+source internet_tv.sql
 ```
 
 </p>
@@ -330,13 +330,13 @@ SET GLOBAL local_infile=on;
 ```
 -> コマンド実行後にユーザのパスワードを入力します。
 
-#### 8. `@@local_infile`ファイルの設定を元に戻します。
+#### 8. MySQLにログインし、`@@local_infile`ファイルの設定を元に戻します。
 
 ```sql
 SET GLOBAL local_infile=off;
 ```
 
-
+</p> </details>
 
 
 ## ステップ3:データを抽出するクエリ
